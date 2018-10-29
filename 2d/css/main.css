@@ -250,13 +250,102 @@ h2 {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 70%; }
+  width: 90%;
+  height: 38%; }
 
 .el1 {
-  display: block;
-  border: 1px solid #191919;
-  height: 200px;
-  width: 200px; }
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 29%;
+  height: 100%; }
+
+.focus {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+  -webkit-background-size: cover;
+          background-size: cover;
+  overflow: hidden;
+  background-color: #000; }
+  .focus .im {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 100%; }
+    .focus .im img {
+      height: 100%;
+      width: 100%; }
+
+.focus:hover {
+  border: 10px solid #000;
+  -webkit-border-radius: 70%;
+          border-radius: 70%; }
+
+.el2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 14%;
+  height: 100%; }
+
+.el3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 19%;
+  height: 100%; }
+
+.el4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 34%;
+  height: 100%; }
+
+.el5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 34%;
+  height: 100%; }
+
+.el6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 19%;
+  height: 100%; }
+
+.el7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 14%;
+  height: 100%; }
+
+.el8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 29%;
+  height: 100%; }
 
 .herotext {
   position: relative;
