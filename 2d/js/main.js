@@ -358,7 +358,9 @@ function onTouchEnd(e){
   mouse.x = -9999;
   mouse.y = -9999;
 } */
-
+    img.onload = function() {
+        ctx.drawImage(img,ww/3,wh/3.5);
+    };
 	function initScene(){
 		ww = canvas.clientWidth //= window.innerWidth;
 		wh = canvas.clientHeight //= window.innerHeight;
@@ -368,9 +370,9 @@ function onTouchEnd(e){
 		//ctx.font = "bold "+(ww/5)+"px sans-serif";
 		//ctx.textAlign = "center";
 		//ctx.fillText("12bytes", ww/2, wh/1.7);
-        
-        ctx.drawImage(img,ww/3,wh/4);
-        
+        //img.onload = function() {
+            ctx.drawImage(img,ww/3,wh/3.5);
+        //};
 		var data  = ctx.getImageData(0, 0, ww, wh).data;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.globalCompositeOperation = "screen";
@@ -378,7 +380,7 @@ function onTouchEnd(e){
 		particles = [];
 		for(var i=0;i<ww;i+=Math.round(ww/400)){
 			for(var j=0;j<wh;j+=Math.round(ww/400)){
-				if(data[ ((i + j*ww)*4) + 3] > 150){
+				if(data[ ((i + j*ww)*4) + 3] >150){
 					particles.push(new Particle(i,j));
 				}
 			}
