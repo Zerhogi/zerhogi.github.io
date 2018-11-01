@@ -279,7 +279,7 @@ var canvas = document.querySelector("#scene"),
         
     var colors = ["#0000ff"];
     var img = new Image();
-    img.src = "https://github.com/Zerhogi/zerhogi.github.io/blob/master/2d/img/mini_Logo.png"
+    img.src = "mini_Logo.png"
 
 	var copy = document.querySelector("#copy");
 
