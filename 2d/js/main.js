@@ -279,7 +279,7 @@ var canvas = document.querySelector("#scene"),
         
     var colors = ["#0000ff"];
     var img = new Image();
-    img.src = "/2d/img/minilogo.png"
+    img.src = "/img/mini_Logo.png"
 
 	var copy = document.querySelector("#copy");
 
@@ -306,8 +306,8 @@ var canvas = document.querySelector("#scene"),
 	Particle.prototype.render = function() {
 
 
-		this.accX = (this.dest.x - this.x)/1000;
-		this.accY = (this.dest.y - this.y)/1000;
+		this.accX = (this.dest.x - this.x)/2000;
+		this.accY = (this.dest.y - this.y)/1500;
 		this.vx += this.accX;
 		this.vy += this.accY;
 		this.vx *= this.friction;
@@ -359,11 +359,12 @@ function onTouchEnd(e){
   mouse.y = -9999;
 } */
     img.onload = function() {
-        ctx.drawImage(img,ww/3,wh/3.5);
+        ctx.drawImage(img,ww,wh);
+        initScene();
     };
 	function initScene(){
-		ww = canvas.clientWidth //= window.innerWidth;
-		wh = canvas.clientHeight //= window.innerHeight;
+		ww = canvas.clientWidth = window.innerWidth;
+		wh = canvas.clientHeight = window.innerHeight;
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -371,15 +372,15 @@ function onTouchEnd(e){
 		//ctx.textAlign = "center";
 		//ctx.fillText("12bytes", ww/2, wh/1.7);
         //img.onload = function() {
-            ctx.drawImage(img,ww/3,wh/3.5);
+            ctx.drawImage(img,ww/8,wh/4.5);
         //};
 		var data  = ctx.getImageData(0, 0, ww, wh).data;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.globalCompositeOperation = "screen";
 
 		particles = [];
-		for(var i=0;i<ww;i+=Math.round(ww/400)){
-			for(var j=0;j<wh;j+=Math.round(ww/400)){
+		for(var i=0;i<ww;i+=Math.round(ww/500)){
+			for(var j=0;j<wh;j+=Math.round(ww/500)){
 				if(data[ ((i + j*ww)*4) + 3] >150){
 					particles.push(new Particle(i,j));
 				}
