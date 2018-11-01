@@ -1,4 +1,4 @@
-/* function autoType(elementClass, typingSpeed){
+function autoType(elementClass, typingSpeed){
     var thhis = $(elementClass);
     thhis.css({
       "position": "relative",
@@ -9,7 +9,7 @@
     var text = thhis.text().trim().split('');
     var amntOfChars = text.length;
     var newString = "";
-    thhis.text("|");
+    thhis.text("");
     setTimeout(function(){
       thhis.css("opacity",1);
       thhis.prev().removeAttr("style");
@@ -29,11 +29,11 @@
     // Now to start autoTyping just call the autoType function with the 
     // class of outer div
     // The second paramter is the speed between each letter is typed.   
-    autoType(".type-js",200);
-  }); */
+    autoType(".type-js",300);
+  }); 
 
   //PARTICLES
-  'use strict'
+/* 'use strict'
 
 var canvas = document.querySelector('canvas');
 var ctx = canvas.getContext('2d');
@@ -163,8 +163,10 @@ var particles = [];
 // Додаємо один випромінювач в координатах x,y від початку координат
 // Початок випромінювання
 var emitters = [
-    new Emitter(new Vector(100, 350), Vector.fromAngle(0, 2)), 
-    new Emitter(new Vector(1300, 350), Vector.fromAngle(0, -2))
+    new Emitter(new Vector(0, 0), Vector.fromAngle(0.635, 2)), 
+    new Emitter(new Vector(724, 0), Vector.fromAngle(-0.635, -2)),
+    new Emitter(new Vector(0, 524), Vector.fromAngle(-0.635, 2)),
+    new Emitter(new Vector(724, 524), Vector.fromAngle(0.635, -2))
 ];
 
 var maxParticles = 20000;
@@ -231,7 +233,7 @@ Field.prototype.setMass = function(mass) {
 };
 
 //Створюєм поле правіше випромінювача з від'ємною масою
-var fields = [new Field(new Vector(700,350), -140)];
+var fields = [new Field(new Vector(363,262), -30)];
 
 Particle.prototype.submitToFields = function (fields) {
     //початкове прискорення в кадрі
@@ -267,7 +269,150 @@ function drawCircle(object) {
 };
 
 
-//loop();
+//loop(); */
+var canvas = document.querySelector("#scene"),
+		ctx = canvas.getContext("2d"),
+		particles = [],
+        amount = 0,        
+		mouse = {x:0,y:0},
+		radius = 1;
+        
+    var colors = ["#0000ff"];
+    var img = new Image();
+    img.src = "../img/mini_Logo.png"
+
+	var copy = document.querySelector("#copy");
+
+	var ww = canvas.width = canvas.clientWidth;
+	var wh = canvas.height = canvas.clientHeight;
+
+	function Particle(x,y){
+		this.x =  Math.random()*ww;
+		this.y =  Math.random()*wh;
+		this.dest = {
+			x : x,
+			y: y
+		};
+		this.r = 1; //Math.random()*5 + 2;
+		this.vx = (Math.random()-0.5)*20;
+		this.vy = (Math.random()-0.5)*20;
+		this.accX = 0;
+		this.accY = 0;
+		this.friction = Math.random()*0.05 + 0.94;
+
+		this.color = colors[Math.floor(Math.random()*6)];
+	}
+
+	Particle.prototype.render = function() {
+
+
+		this.accX = (this.dest.x - this.x)/1000;
+		this.accY = (this.dest.y - this.y)/1000;
+		this.vx += this.accX;
+		this.vy += this.accY;
+		this.vx *= this.friction;
+		this.vy *= this.friction;
+
+		this.x += this.vx;
+		this.y += this.vy;
+
+		ctx.fillStyle = this.color;
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, Math.PI * 2, false);
+		ctx.fill();
+
+		var a = this.x - mouse.x;
+		var b = this.y - mouse.y;
+
+		var distance = Math.sqrt( a*a + b*b );
+		if(distance<(radius*40)){
+			this.accX = (this.x - mouse.x)/100;
+			this.accY = (this.y - mouse.y)/100;
+			this.vx += this.accX;
+			this.vy += this.accY;
+		}
+
+	}    
+    
+	/* function onMouseMove(e){        
+        mouse.x = e.clientX;
+		mouse.y = e.clientY;
+    } */
+    function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+    
+
+	/* function onTouchMove(e){
+    if(e.touches.length > 0 ){
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+    }
+	}
+
+function onTouchEnd(e){
+  mouse.x = -9999;
+  mouse.y = -9999;
+} */
+
+	function initScene(){
+		ww = canvas.clientWidth //= window.innerWidth;
+		wh = canvas.clientHeight //= window.innerHeight;
+
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		//ctx.font = "bold "+(ww/5)+"px sans-serif";
+		//ctx.textAlign = "center";
+		//ctx.fillText("12bytes", ww/2, wh/1.7);
+        
+        ctx.drawImage(img,ww/3,wh/4);
+        
+		var data  = ctx.getImageData(0, 0, ww, wh).data;
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.globalCompositeOperation = "screen";
+
+		particles = [];
+		for(var i=0;i<ww;i+=Math.round(ww/400)){
+			for(var j=0;j<wh;j+=Math.round(ww/400)){
+				if(data[ ((i + j*ww)*4) + 3] > 150){
+					particles.push(new Particle(i,j));
+				}
+			}
+		}
+		amount = particles.length;
+
+	}
+
+	function onMouseClick(){
+        initScene();        
+	}
+
+	function render(a) {
+		requestAnimationFrame(render);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		for (var i = 0; i < amount; i++) {
+			particles[i].render();
+		}
+	};
+
+	//copy.addEventListener("keyup", initScene);
+	window.addEventListener("resize", initScene);
+	canvas.addEventListener("mousemove", function(evt){
+        var mousePos = getMousePos(canvas, evt);
+        mouse.x = mousePos.x;
+        mouse.y = mousePos.y;
+    });
+	//window.addEventListener("touchmove", onTouchMove);
+	window.addEventListener("click", onMouseClick);
+	//window.addEventListener("touchend", onTouchEnd);
+	initScene();
+	requestAnimationFrame(render);
+
+
 
 //плавная прокрутка
 var $page = $('html, body');
