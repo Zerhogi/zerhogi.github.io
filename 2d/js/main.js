@@ -279,7 +279,7 @@ var canvas = document.querySelector("#scene"),
         
     var colors = ["#0000ff"];
     var img = new Image();
-    img.src = "../img/mini_Logo.png"
+    img.src = "../img/minilogo.png"
 
 	var copy = document.querySelector("#copy");
 
