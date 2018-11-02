@@ -359,7 +359,7 @@ function onTouchEnd(e){
   mouse.y = -9999;
 } */
     img.onload = function() {
-        ctx.drawImage(img,ww/2,wh/2.2);
+        ctx.drawImage(img,ww/2,wh/2.5);
         initScene();
     };
 	function initScene(){
@@ -372,7 +372,7 @@ function onTouchEnd(e){
 		//ctx.textAlign = "center";
 		//ctx.fillText("12bytes", ww/2, wh/1.7);
         //img.onload = function() {
-            ctx.drawImage(img,ww/2,wh/2.2);
+            ctx.drawImage(img,ww/2,wh/2.5);
         //};
 		var data  = ctx.getImageData(0, 0, ww, wh).data;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
