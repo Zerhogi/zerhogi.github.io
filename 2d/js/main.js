@@ -359,7 +359,7 @@ function onTouchEnd(e){
   mouse.y = -9999;
 } */
     img.onload = function() {
-        ctx.drawImage(img,ww/2,wh/2.5);
+        ctx.drawImage(img,ww/ww,wh/wh);
         initScene();
     };
 	function initScene(){
