@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script>
+            $(document).ready( function() {
+                $("#file").change(function(){
+                     var filename = $(this).val().replace(/.*\\/, "");
+                     $("#fl_nm").html(filename);
+                });
+            });
+    </script>
+</head>
+<body>
+    <header>        
+        <nav role="navigation">
+            <div id="menuToggle">                
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="{{url_for('index')}}"><li>Домашня</li></a>
+                    <a href="{{url_for('add')}}"><li>Додати пост</li></a>
+                    <a href="{{url_for('about')}}"><li>Про мене</li></a>
+                    <a href="{{url_for('contact')}}"><li>Контакти</li></a>                
+                </ul>
+            </div>
+        </nav>       
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </header>
+    <section>
+        <form class="add_post" action="{{ url_for('addpost') }}" method="POST" name="add" enctype="multipart/form-data">
+            <ul>
+                <li>
+                    <H2 class="h2">Нова публікація:</H2>
+                </li>
+                <li>
+                    <label for="title">Заголовок:</label>
+                    <input type="text" autocomplete="off" required name="title" placeholder="Твій заголовок"/>
+                </li>
+                <li class="img">
+                    <label for="image">Зображення:</label>
+                    <div class="upl">
+                    <label><input type="file" name="image" accept="image/*,image/jpeg" id="file" class="inputfile"/>Виберіть файл</label>
+                    <div id="fl_nm">Файл не вибрано</div>
+                    </div>
+                </li>
+                <li>
+                    <label class="lable" for="name">Ваше ім'я:</label>
+                    <input type="text" autocomplete="off" required name="name" placeholder="Ім'я"/>
+                </li>
+                <li>
+                    <label for="message">Текст публікації:</label>
+                    <textarea name="message" required cols="40" rows="6" ></textarea>
+                </li>
+                <li>
+                    <button class="submit" type="submit">Створити</button>
+                </li>
+            </ul>
+        </form>
+    </section>
+    <footer>
+            <p>©Zerhogi</p>
+    </footer>
+</body>
+</html>

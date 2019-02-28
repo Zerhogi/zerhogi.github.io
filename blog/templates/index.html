@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c:300,400,500,700,800&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+</head>
+<body>
+    <header>        
+        <nav role="navigation">
+            <div id="menuToggle">                
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="{{url_for('index')}}"><li>Домашня</li></a>
+                    <a href="{{url_for('add')}}"><li>Додати пост</li></a>
+                    <a href="{{url_for('about')}}"><li>Про мене</li></a>
+                    <a href="{{url_for('contact')}}"><li>Контакти</li></a>                
+                </ul>
+            </div>
+        </nav>       
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </header>
+    <section id="sec">
+        <div class="container">
+            {% for post in posts %}
+            <div class="post">                
+                <div class="post-img">
+                    <img src="{{ url_for('static', filename='photos/'+post.image) }}" alt="1">
+                </div>
+                <div class="text">
+                    <h2 class="post-header">{{post.title}}</h2>
+                    <p class="time">Опублікував {{post.author}}, {{post.date_posted.strftime('%B %d, %Y')}}</p>
+                    <p>{{ post.content | truncate(500, True, leeway=0) }}</p>
+                </div>                
+                <a class="readp" href="{{url_for('post', post_id=post.id)}}"><div class="post-read">Більше</div></a>
+            </div>
+            {% endfor %}            
+        </div>            
+    </section>    
+    <footer>
+        <p>©Zerhogi</p>
+    </footer>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

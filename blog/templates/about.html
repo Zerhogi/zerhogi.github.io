@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+    <header>        
+        <nav role="navigation">
+            <div id="menuToggle">                
+                <input type="checkbox" />
+                <span></span>
+                <span></span>
+                <span></span>
+                <ul id="menu">
+                    <a href="{{url_for('index')}}"><li>Домашня</li></a>
+                    <a href="{{url_for('add')}}"><li>Додати пост</li></a>
+                    <a href="{{url_for('about')}}"><li>Про мене</li></a>
+                    <a href="{{url_for('contact')}}"><li>Контакти</li></a>                
+                </ul>
+            </div>
+        </nav>       
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+    </header>
+    <section>
+        <h2>Про мене:</h2>
+        <div class="container">            
+            <img src="{{ url_for('static', filename='img/un.png') }}" alt="foto" width="128" height="128">
+            <p class="abouttext">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat error consectetur sint qui quidem deleniti non obcaecati vitae reprehenderit illum perferendis nesciunt quo ex nam rem minima vero eius adipisci magni pariatur beatae, culpa ipsum? Explicabo nam quasi quam saepe impedit sunt voluptatum error ab accusamus deserunt. Fugiat, ab ullam!</p>
+        </div>
+    </section>
+    <footer>
+        <p>©Zerhogi</p>
+    </footer>    
+</body>
+</html>
